@@ -1,14 +1,7 @@
-version: 2
-jobs:
-  example-job:
-    docker:
-      # replace with your preferred image
-      - image: cimg/base:stable
-    steps:
-      - docker/push:
-          image: santannaflavia/mit-repository-flavinha:circleci-flavia 
-
+version: 2.1
+orbs:
+   node: circleci/node@3.0.0
 workflows:
-  example-workflow:
-    jobs:
-      - example-job
+   node-tests:
+     jobs:
+        - node/test
