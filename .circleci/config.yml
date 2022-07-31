@@ -1,14 +1,20 @@
-version: 2
+# Arquivo configuracao Flavinha
+version: 2.1
 jobs:
-  example-job:
+  criar_docker:
     docker:
-      # replace with your preferred image
-      - image: cimg/base:stable
+       - image: cimg/node:18.7.0
     steps:
-      - docker/push:
-          image: santannaflavia/mit-repository-flavinha:circleci-flavia 
-
+      - checkout
+      - run: npm install
+      - run: npm install express 
+  testar:
+    docker:
+      - image: cimg/node:18.7.0
+    steps:
+      - run: npm test 
 workflows:
-  example-workflow:
-    jobs:
-      - example-job
+   criar_e_testar:
+     jobs:
+      - criar_docker
+      - testar
