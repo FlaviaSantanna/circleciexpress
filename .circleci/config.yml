@@ -1,20 +1,8 @@
 # Arquivo configuracao Flavinha
 version: 2.1
-jobs:
-  criar_docker:
-    docker:
-       - image: cimg/node:18.7.0
-    steps:
-      - checkout
-      - run: npm install
-      - run: npm install express 
-  testar:
-    docker:
-      - image: cimg/node:18.7.0
-    steps:
-      - run: npm test 
+orbs:
+    node: circleci/node@3.0.0
 workflows:
-   criar_e_testar:
-     jobs:
-      - criar_docker
-      - testar
+    node-tests:
+jobs:
+  - node/test
